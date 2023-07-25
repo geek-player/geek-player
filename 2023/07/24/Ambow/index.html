@@ -191,7 +191,7 @@
     
         <span class="article-update-date article-meta-item">
         <i class="fas fa-file-pen"></i>&nbsp;
-        <span class="pc">2023-07-24 18:39:24</span>
+        <span class="pc">2023-07-25 09:59:06</span>
     </span>
     
     
@@ -227,9 +227,12 @@
                 <h1 style="font-size: 60px; text-align: center">Ambow</h1>
 
 <h2 id="Day-01"><a href="#Day-01" class="headerlink" title="Day-01"></a>Day-01</h2><h3 id="Java特性"><a href="#Java特性" class="headerlink" title="Java特性"></a>Java特性</h3><h4 id="面向对象（万物皆对象）："><a href="#面向对象（万物皆对象）：" class="headerlink" title="面向对象（万物皆对象）："></a>面向对象<strong>（<span style="color: red">万物皆对象</span>）</strong>：</h4><ul>
-<li>封装</li>
-<li>继承</li>
-<li>多态</li>
+<li><p>封装：将客观事物抽象成类，每个类可以把自身数据和方法只让可信的类或对象操作，对不可信的进行信息隐藏。</p>
+</li>
+<li><p>继承：对象的一个新类可以从现有的类中派生，派生类可以从它的基类那继承方法和实例变量，且派生类可以修改或新增新的方法使之更适合特殊的需求。</p>
+</li>
+<li><p>多态：允许不同类的对象对同一消息作出响应。不同对象调用相同方法即使参数也相同，最终表现行为是不一样的。</p>
+</li>
 </ul>
 <h3 id="JDBC"><a href="#JDBC" class="headerlink" title="JDBC"></a>JDBC</h3><h5 id="JDBC工具类"><a href="#JDBC工具类" class="headerlink" title="JDBC工具类"></a>JDBC工具类</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.ambow.utils;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.mysql.cj.jdbc.Driver;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.sql.*;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span> Admin</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@create</span> 2023/7/24 11:11</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">JDBCUtils</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 获取与MySQL数据努的连接</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 数据库连接</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Connection <span class="title function_">getConnection</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="type">Connection</span> <span class="variable">connection</span> <span class="operator">=</span> <span class="literal">null</span> ;</span><br><span class="line">        <span class="type">Statement</span> <span class="variable">statement</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="type">String</span> <span class="variable">url</span> <span class="operator">=</span> <span class="string">&quot;jdbc:/mysql///demo&quot;</span>;</span><br><span class="line">            <span class="type">String</span> <span class="variable">username</span> <span class="operator">=</span> <span class="string">&quot;root&quot;</span>;</span><br><span class="line">            <span class="type">String</span> <span class="variable">password</span> <span class="operator">=</span> <span class="string">&quot;root&quot;</span>;</span><br><span class="line">            <span class="type">String</span> <span class="variable">driver</span> <span class="operator">=</span> <span class="string">&quot;com.mysql.cj.jdbc.Driver&quot;</span>;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                Class.forName(driver);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">RuntimeException</span>(e);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> DriverManager.getConnection(url,username,password);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (SQLException sqlException) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">RuntimeException</span>(sqlException);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 关闭数据库连接</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">close</span><span class="params">(Statement statement, Connection connection)</span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            statement.close();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">RuntimeException</span>(e);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            connection.close();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">RuntimeException</span>(e);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 关闭数据库连接</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">close</span><span class="params">(Statement statement, Connection connection, ResultSet resultSet)</span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            statement.close();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">RuntimeException</span>(e);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            connection.close();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">RuntimeException</span>(e);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            resultSet.close();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">RuntimeException</span>(e);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -238,7 +241,190 @@
 <h2 id="作业"><a href="#作业" class="headerlink" title="作业"></a>作业</h2><p>用递归的方式获取该路径下的所有目录</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        directory(<span class="string">&quot;D:/Java/jdk1.8&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">directory</span><span class="params">(String path)</span> &#123;</span><br><span class="line">        <span class="type">File</span> <span class="variable">file</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">File</span>(path);</span><br><span class="line">        <span class="keyword">if</span> ( ! file.isDirectory() ) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (String s : Objects.requireNonNull(file.list())) &#123;</span><br><span class="line">            System.out.println(path + <span class="string">&quot;/&quot;</span> + s);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> ( String dir : Objects.requireNonNull(file.list()) )&#123;</span><br><span class="line">            directory(path + <span class="string">&quot;/&quot;</span> + dir);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<h2 id="Day-02"><a href="#Day-02" class="headerlink" title="Day-02"></a>Day-02</h2><h3 id="Java基础语法"><a href="#Java基础语法" class="headerlink" title="Java基础语法"></a>Java基础语法</h3><h4 id="一、变量"><a href="#一、变量" class="headerlink" title="一、变量"></a>一、变量</h4><ul>
+<li>byte: 占用 1 个字节，取值范围-128 ~ 127</li>
+<li>short: 占用 2 个字节，取值范围-2^15^ ~ 2^15^-1</li>
+<li>int：占用 4 个字节，取值范围-2^31^ ~ 2^31^-1</li>
+<li>long：占用 8 个字节</li>
+<li>float：占用 4 个字节</li>
+<li>double：占用 8 个字节</li>
+<li>char: 占用 2 个字节</li>
+<li>boolean：占用大小根据实现虚拟机不同有所差异</li>
+</ul>
+<h4 id="二、运算"><a href="#二、运算" class="headerlink" title="二、运算"></a>二、运算</h4><h5 id="1-算术运算符"><a href="#1-算术运算符" class="headerlink" title="1.算术运算符"></a>1.算术运算符</h5><table>
+<thead>
+<tr>
+<th align="left">操作符</th>
+<th align="left">描述</th>
+<th align="left">例子（A&#x3D;10,B&#x3D;20）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">+</td>
+<td align="left">加法 - 相加运算符两侧的值</td>
+<td align="left">A + B &#x3D;&#x3D; 30</td>
+</tr>
+<tr>
+<td align="left">-</td>
+<td align="left">减法 - 左操作数减去右操作数</td>
+<td align="left">A – B&#x3D;&#x3D; -10</td>
+</tr>
+<tr>
+<td align="left">*</td>
+<td align="left">乘法 - 相乘操作符两侧的值</td>
+<td align="left">A * B &#x3D;&#x3D; 200</td>
+</tr>
+<tr>
+<td align="left">&#x2F;</td>
+<td align="left">除法 - 左操作数除以右操作数</td>
+<td align="left">B &#x2F; A &#x3D;&#x3D; 2</td>
+</tr>
+<tr>
+<td align="left">％</td>
+<td align="left">取余 - 左操作数除以右操作数的余数</td>
+<td align="left">B % A &#x3D;&#x3D; 0</td>
+</tr>
+<tr>
+<td align="left">++</td>
+<td align="left">自增: 操作数的值增加1</td>
+<td align="left">B ++（先使用后自增） 或 ++ B （先自增后使用）</td>
+</tr>
+<tr>
+<td align="left">–</td>
+<td align="left">自减: 操作数的值减少1</td>
+<td align="left">B – （先使用后自减）或 – B （先自减后使用）</td>
+</tr>
+</tbody></table>
+<h5 id="2-关系运算符"><a href="#2-关系运算符" class="headerlink" title="2.关系运算符"></a>2.关系运算符</h5><table>
+<thead>
+<tr>
+<th align="left">运算符</th>
+<th align="left">描述</th>
+<th align="left">例子（A&#x3D;10,B&#x3D;20）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">&#x3D;&#x3D;</td>
+<td align="left">检查如果两个操作数的值是否相等，如果相等则条件为真。</td>
+<td align="left">(A &#x3D;&#x3D; B) &#x3D;&#x3D; false</td>
+</tr>
+<tr>
+<td align="left">!&#x3D;</td>
+<td align="left">检查如果两个操作数的值是否相等，如果值不相等则条件为真。</td>
+<td align="left">(A !&#x3D; B) &#x3D;&#x3D; true</td>
+</tr>
+<tr>
+<td align="left">&gt;</td>
+<td align="left">检查左操作数的值是否大于右操作数的值，如果是那么条件为真。</td>
+<td align="left">(A &gt; B) &#x3D;&#x3D; false</td>
+</tr>
+<tr>
+<td align="left">&lt;</td>
+<td align="left">检查左操作数的值是否小于右操作数的值，如果是那么条件为真。</td>
+<td align="left">(A &lt; B) &#x3D;&#x3D; true</td>
+</tr>
+<tr>
+<td align="left">&gt;&#x3D;</td>
+<td align="left">检查左操作数的值是否大于或等于右操作数的值，如果是那么条件为真。</td>
+<td align="left">(A &gt;&#x3D; B) &#x3D;&#x3D; false</td>
+</tr>
+<tr>
+<td align="left">&lt;&#x3D;</td>
+<td align="left">检查左操作数的值是否小于或等于右操作数的值，如果是那么条件为真。</td>
+<td align="left">(A &lt;&#x3D; B) &#x3D;&#x3D; true</td>
+</tr>
+</tbody></table>
+<h5 id="3-逻辑运算符"><a href="#3-逻辑运算符" class="headerlink" title="3.逻辑运算符"></a>3.逻辑运算符</h5><table>
+<thead>
+<tr>
+<th align="left">操作符</th>
+<th align="left">描述</th>
+<th align="left">例子（A&#x3D;true,b&#x3D;false)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">&amp;&amp;</td>
+<td align="left">称为逻辑与运算符。当且仅当两个操作数都为真，条件才为真。</td>
+<td align="left">(A &amp;&amp; B) &#x3D;&#x3D; flase</td>
+</tr>
+<tr>
+<td align="left">||</td>
+<td align="left">称为逻辑或操作符。如果任何两个操作数任何一个为真，条件为真。</td>
+<td align="left">( A || B) &#x3D;&#x3D; true</td>
+</tr>
+<tr>
+<td align="left">!</td>
+<td align="left">称为逻辑非运算符。用来反转操作数的逻辑状态。如果条件为true，则逻辑非运算符将得到false。</td>
+<td align="left">!( A &amp;&amp; B) &#x3D;&#x3D; true</td>
+</tr>
+</tbody></table>
+<h5 id="4-赋值运算符"><a href="#4-赋值运算符" class="headerlink" title="4.赋值运算符"></a>4.赋值运算符</h5><table>
+<thead>
+<tr>
+<th align="left">操作符</th>
+<th align="left">描述</th>
+<th align="left">例子</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">&#x3D;</td>
+<td align="left">简单的赋值运算符，将右操作数的值赋给左侧操作数</td>
+<td align="left">C &#x3D; A + B将把A + B得到的值赋给C</td>
+</tr>
+<tr>
+<td align="left">+&#x3D;</td>
+<td align="left">加和赋值操作符，它把左操作数和右操作数相加赋值给左操作数</td>
+<td align="left">C + &#x3D; A等价于C &#x3D; C + A</td>
+</tr>
+<tr>
+<td align="left">-&#x3D;</td>
+<td align="left">减和赋值操作符，它把左操作数和右操作数相减赋值给左操作数</td>
+<td align="left">C - &#x3D; A等价于C &#x3D; C - A</td>
+</tr>
+<tr>
+<td align="left">*&#x3D;</td>
+<td align="left">乘和赋值操作符，它把左操作数和右操作数相乘赋值给左操作数</td>
+<td align="left">C * &#x3D; A等价于C &#x3D; C * A</td>
+</tr>
+<tr>
+<td align="left">&#x2F;&#x3D;</td>
+<td align="left">除和赋值操作符，它把左操作数和右操作数相除赋值给左操作数</td>
+<td align="left">C &#x2F; &#x3D; A，C 与 A 同类型时等价于 C &#x3D; C &#x2F; A</td>
+</tr>
+<tr>
+<td align="left">（％）&#x3D;</td>
+<td align="left">取模和赋值操作符，它把左操作数和右操作数取模后赋值给左操作数</td>
+<td align="left">C％&#x3D; A等价于C &#x3D; C％A</td>
+</tr>
+<tr>
+<td align="left">&lt;&lt;&#x3D;</td>
+<td align="left">左移位赋值运算符</td>
+<td align="left">C &lt;&lt; &#x3D; 2等价于C &#x3D; C &lt;&lt; 2</td>
+</tr>
+<tr>
+<td align="left">&gt;&gt;&#x3D;</td>
+<td align="left">右移位赋值运算符</td>
+<td align="left">C &gt;&gt; &#x3D; 2等价于C &#x3D; C &gt;&gt; 2</td>
+</tr>
+<tr>
+<td align="left">＆&#x3D;</td>
+<td align="left">按位与赋值运算符</td>
+<td align="left">C＆&#x3D; 2等价于C &#x3D; C＆2</td>
+</tr>
+<tr>
+<td align="left">^&#x3D;</td>
+<td align="left">按位异或赋值操作符</td>
+<td align="left">C ^ &#x3D; 2等价于C &#x3D; C ^ 2</td>
+</tr>
+<tr>
+<td align="left">|&#x3D;</td>
+<td align="left">按位或赋值操作符</td>
+<td align="left">C | &#x3D; 2等价于C &#x3D; C | 2</td>
+</tr>
+</tbody></table>
+<h4 id="三、循环"><a href="#三、循环" class="headerlink" title="三、循环"></a>三、循环</h4><img src="./maopao.gif" alt="冒泡排序">
 
+<h4 id="四、数组"><a href="#四、数组" class="headerlink" title="四、数组"></a>四、数组</h4><h4 id="五、数组"><a href="#五、数组" class="headerlink" title="五、数组"></a>五、数组</h4><h4 id="六、排序"><a href="#六、排序" class="headerlink" title="六、排序"></a>六、排序</h4><h4 id="六、面向对象"><a href="#六、面向对象" class="headerlink" title="六、面向对象"></a>六、面向对象</h4>
             </div>
 
             
@@ -305,7 +491,7 @@
             <div class="toc-content-container">
                 <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-text">Ambow</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Day-01"><span class="nav-text">Day-01</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Java%E7%89%B9%E6%80%A7"><span class="nav-text">Java特性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%EF%BC%88%E4%B8%87%E7%89%A9%E7%9A%86%E5%AF%B9%E8%B1%A1%EF%BC%89%EF%BC%9A"><span class="nav-text">面向对象（万物皆对象）：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JDBC"><span class="nav-text">JDBC</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#JDBC%E5%B7%A5%E5%85%B7%E7%B1%BB"><span class="nav-text">JDBC工具类</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%9C%E4%B8%9A"><span class="nav-text">作业</span></a></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-text">Ambow</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Day-01"><span class="nav-text">Day-01</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Java%E7%89%B9%E6%80%A7"><span class="nav-text">Java特性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%EF%BC%88%E4%B8%87%E7%89%A9%E7%9A%86%E5%AF%B9%E8%B1%A1%EF%BC%89%EF%BC%9A"><span class="nav-text">面向对象（万物皆对象）：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JDBC"><span class="nav-text">JDBC</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#JDBC%E5%B7%A5%E5%85%B7%E7%B1%BB"><span class="nav-text">JDBC工具类</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%9C%E4%B8%9A"><span class="nav-text">作业</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Day-02"><span class="nav-text">Day-02</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Java%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95"><span class="nav-text">Java基础语法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%8F%98%E9%87%8F"><span class="nav-text">一、变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E8%BF%90%E7%AE%97"><span class="nav-text">二、运算</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-%E7%AE%97%E6%9C%AF%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-text">1.算术运算符</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-%E5%85%B3%E7%B3%BB%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-text">2.关系运算符</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-text">3.逻辑运算符</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-%E8%B5%8B%E5%80%BC%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-text">4.赋值运算符</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E5%BE%AA%E7%8E%AF"><span class="nav-text">三、循环</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E6%95%B0%E7%BB%84"><span class="nav-text">四、数组</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E6%95%B0%E7%BB%84"><span class="nav-text">五、数组</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%AD%E3%80%81%E6%8E%92%E5%BA%8F"><span class="nav-text">六、排序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%AD%E3%80%81%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1"><span class="nav-text">六、面向对象</span></a></li></ol></li></ol></li></ol></li></ol>
     </div>
 </div>
 
